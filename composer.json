@@ -1,0 +1,26 @@
+{
+    "name": "pickupman/omnipay-hrh",
+    "description": "Omnipay gateway for High Risk Holdings",
+    "type": "library",
+    "require": {
+        "omnipay/common": "~3.0"
+    },
+    "keywords": [
+        "high risk holdings",
+        "gateway",
+        "merchant",
+        "omnipay",
+        "pay",
+        "payment"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Joe McFrederick",
+            "email": "jomcfred@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "Omnipay\\Hrh\\" : "src/" }
+    }
+}
