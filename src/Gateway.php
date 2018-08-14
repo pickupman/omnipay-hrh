@@ -13,7 +13,62 @@ class Gateway extends AbstractGateway
 
     public function getDefaultParameters()
     {
-        return array();
+        return array(
+            'username',
+            'password',
+            'security_key',
+            'testMode',
+        );
+    }
+
+    public function getUsername()
+    {
+        $this->getParameter('username');
+    }
+
+    public function setUsername($value)
+    {
+        return $this->setParameter('username', $value);
+    }
+
+    public function getPassword()
+    {
+        return $this->getParameter('password', $value);
+    }
+
+    public function setPassword($value)
+    {
+        return $this->setParameter('password', $value);
+    }
+
+    public function getSecurityKey()
+    {
+        return $this->getParameter('security_key');
+    }
+
+    public function setSecurityKey($value)
+    {
+        return $this->setParameter('security_key', $value);
+    }
+
+    public function getApiKey()
+    {
+        return $this->getSecurityKey();
+    }
+
+    public function setApiKey($value)
+    {
+        return $this->setSecurityKey($value);
+    }
+
+    public function getTestMode()
+    {
+        return $this->getParameter('testMode');
+    }
+
+    public function setTestMode()
+    {
+        return $this->setParameter('testMode');
     }
 
     public function authorize(array $parameters = array())

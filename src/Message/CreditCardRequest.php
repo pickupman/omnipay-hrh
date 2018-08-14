@@ -14,7 +14,7 @@ class CreditCardRequest extends AbstractRequest
 {
     public function getData()
     {
-        $this->validate('amount', 'card');
+        $this->validate('amount', 'card', 'username', 'password', 'orderid');
 
         $this->getCard()->validate();
 
@@ -23,9 +23,7 @@ class CreditCardRequest extends AbstractRequest
 
     public function sendData($data)
     {
-        $data['reference'] = uniqid();
-        $data['success'] = 0 === substr($this->getCard()->getNumber(), -1, 1) % 2;
-        $data['message'] = $data['success'] ? 'Success' : 'Failure';
+        $data['type'] = 'sale';
 
         return $this->response = new Response($this, $data);
     }
