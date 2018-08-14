@@ -61,14 +61,24 @@ class Gateway extends AbstractGateway
         return $this->setSecurityKey($value);
     }
 
+    public function getOrderId()
+    {
+        return $this->getParameter('orderid');
+    }
+
+    public function setOrderId($value)
+    {
+        return $this->setParameter('orderid', $value);
+    }
+
     public function getTestMode()
     {
         return $this->getParameter('testMode');
     }
 
-    public function setTestMode()
+    public function setTestMode($value)
     {
-        return $this->setParameter('testMode');
+        return $this->setParameter('testMode', $value);
     }
 
     public function authorize(array $parameters = array())
