@@ -83,37 +83,37 @@ class Gateway extends AbstractGateway
 
     public function authorize(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\Hrh\Message\CreditCardRequest', $parameters);
+        return $this->createRequest('\Omnipay\Hrh\Message\AuthorizeRequest', $parameters);
     }
 
     public function purchase(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\Hrh\Message\CreditCardRequest', $parameters);
+        return $this->createRequest('\Omnipay\Hrh\Message\PurchaseRequest', $parameters);
     }
 
     public function completeAuthorize(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\Hrh\Message\TransactionReferenceRequest', $parameters);
+        return $this->createRequest('\Omnipay\Hrh\Message\AuthorizeRequest', $parameters);
     }
 
     public function capture(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\Hrh\Message\TransactionReferenceRequest', $parameters);
+        return $this->createRequest('\Omnipay\Hrh\Message\CaptureRequest', $parameters);
     }
 
     public function completePurchase(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\Hrh\Message\TransactionReferenceRequest', $parameters);
+        return $this->createRequest('\Omnipay\Hrh\Message\PurchaseRequest', $parameters);
     }
 
     public function refund(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\Hrh\Message\TransactionReferenceRequest', $parameters);
+        return $this->createRequest('\Omnipay\Hrh\Message\RefundRequest', $parameters);
     }
 
     public function void(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\Hrh\Message\TransactionReferenceRequest', $parameters);
+        return $this->createRequest('\Omnipay\Hrh\Message\VoidRequest', $parameters);
     }
 
     public function createCard(array $parameters = array())

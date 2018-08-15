@@ -32,9 +32,9 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->getParameter('username');
     }
 
-    public function setUsername()
+    public function setUsername($value)
     {
-        return $this->setParameter('username');
+        return $this->setParameter('username', $value);
     }
 
     public function getPassword()
@@ -94,17 +94,6 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->setParameter('invoiceReference', $value);
     }
 
-    public function getOrderId()
-    {
-        return $this->getParameter('orderid');
-    }
-
-    public function setOrderId($value)
-    {
-        return $this->setParameter('orderid', $value);
-    }
-
-
     /**
      * @return string|NULL
      */
@@ -128,9 +117,8 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         $card = $this->getCard();
         if ($card) {
             $data = array(
-                // Login Information
-                'username' => ($this->getTestMode()) ? 'demo' : $this->getUsername(),
-                'password' => ($this->getTestMode()) ? 'password' : $this->getPassword(),
+
+                'ipaddress' => $this->getClientIp(),
 
                 // Billing Information
                 'firstname' => $card->getFirstName(),
@@ -156,14 +144,29 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
                 'shipping_phone'     => $card->getShippingPhone(),
             );
 
-            $data['ShippingAddress']['Phone'] = $card->getShippingPhone();
         }
 
         return $data;
     }
 
+    protected function getHttpMethod()
+    {
+        return 'POST';
+    }
+
     public function getEndpointBase()
     {
         return $this->getTestMode() ? $this->testEndpoint : $this->liveEndpoint;
+    }
+
+    public function sendData($data)
+    {
+
+        $data['username'] = ($this->getParameter('testMode')) ? 'demo'     : $this->getUsername();
+        $data['password'] = ($this->getParameter('testMode')) ? 'password' : $this->getPassword();
+
+        $httpResponse = $this->httpClient->request($this->getHttpMethod(), $this->getEndpointBase(), [], http_build_query($data));
+
+        return $this->response = new Response($this, $httpResponse->getBody()->getContents());
     }
 }
